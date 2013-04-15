@@ -3,7 +3,7 @@ Contributors: webheadllc
 Tags: contact form 7, multistep form, form, multiple pages, store form
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 1.01
+Stable tag: 1.02
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,9 @@ I have used countless free plugins and have saved countless hours.  I could not 
 
 
 == Changelog ==
+
+= 1.02 =
+updated version numbers.
 
 = 1.01 =
 updated readme.
