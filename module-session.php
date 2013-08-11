@@ -74,8 +74,13 @@ function wpcf7_form_shortcode_handler( $tag ) {
 		$id_att = trim( $id_att );
 	}
 	
+	$value = '';
 	//return raw value, let filters sanitize if needed.
-	$value = isset($_SESSION['cf7_posted_data'][$name])?$_SESSION['cf7_posted_data'][$name]:'';
+	$cf7msm_posted_data = cf7msm_get('cf7msm_posted_data');
+
+	if ( !empty( $cf7msm_posted_data ) && is_array( $cf7msm_posted_data ) ) {
+		$value = isset( $cf7msm_posted_data[$name] ) ? $cf7msm_posted_data[$name] : '';	
+	}
 	if (is_array($value)) {
 	    $value = implode(", ", $value);
 	}
