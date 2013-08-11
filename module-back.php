@@ -5,13 +5,16 @@
 
 /* Shortcode handler */
 
-add_action( 'init', 'cf7msm_add_shortcode_back', 5 );
+add_action( 'init', 'cf7msm_add_shortcode_back' );
 
 function cf7msm_add_shortcode_back() {
-	wpcf7_add_shortcode( 'back', 'cf7msm_back_shortcode_handler' );
+	if (function_exists('wpcf7_add_shortcode'))
+		wpcf7_add_shortcode( 'back', 'cf7msm_back_shortcode_handler' );
 }
 
 function cf7msm_back_shortcode_handler( $tag ) {
+	if (!class_exists('WPCF7_Shortcode') || !function_exists('wpcf7_form_controls_class'))
+		return;
 	$tag = new WPCF7_Shortcode( $tag );
 
 	$class = wpcf7_form_controls_class( $tag->type );
