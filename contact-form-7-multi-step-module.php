@@ -5,7 +5,7 @@ Plugin URI: http://www.mymonkeydo.com/contact-form-7-multi-step-module/
 Description: Enables the Contact Form 7 plugin to create multi-page, multi-step forms.
 Author: Webhead LLC.
 Author URI: http://webheadcoder.com 
-Version: 1.3.1
+Version: 1.3.2
 */
 /*  Copyright 2012 Webhead LLC (email: info at webheadcoder.com)
 
@@ -40,7 +40,10 @@ require_once(plugin_dir_path(__FILE__) . 'module-back.php');
 function cf7msm_init_sessions() {
 	//try to set cookie
 	if ( empty( $_COOKIE['cf7msm_check'] ) ) {
-		setcookie('cf7msm_check', 1, 0, COOKIEPATH, COOKIE_DOMAIN);	
+		$force_session = apply_filters('cf7msm_force_session', false);
+		if ( !$force_session ) {
+			setcookie('cf7msm_check', 1, 0, COOKIEPATH, COOKIE_DOMAIN);		
+		}
 
 	    if (!session_id()) {
 	        session_start();
@@ -48,6 +51,7 @@ function cf7msm_init_sessions() {
 	}
 }
 add_action('init', 'cf7msm_init_sessions'); 
+
  
 /**
  * Add scripts to be able to go back to a previous step.
