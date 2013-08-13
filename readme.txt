@@ -2,8 +2,8 @@
 Contributors: webheadllc
 Tags: contact form 7, multistep form, form, multiple pages, store form
 Requires at least: 3.4.1
-Tested up to: 3.5.1
-Stable tag: 1.02
+Tested up to: 3.6
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,8 +33,12 @@ the user to another page.
 
 In a contact form, to retrieve fields from previous forms you can use something like [form your-email] where "your-email" is the name of the field from the previous form.  This would be useful on the last step where it is confirming all the info from previous forms.
 
+In a contact form you users may want to go back to a previous step to change some info they entered.  To allow the user to go back, add the [back "Previous Step"] button to the form.
+
 **Additional Info**
 The hidden field is taken directly from the "Contact Form 7 Modules".  If you have that installed, the Multi-Step plugin will use that.
+
+This plugin does not support File Uploads.  If you need to use file uploads make sure to place it on the last step.
 
 == Frequently Asked Questions ==
 
@@ -44,6 +48,20 @@ I have used countless free plugins and have saved countless hours.  I could not 
 
 
 == Changelog ==
+
+= 1.3.2 =
+Some people are having trouble with cookies.  added 'cf7msm_force_session' filter to force to use session.
+
+= 1.3.1 =
+Added checks to prevent errors when contact form 7 is not installed.
+
+= 1.3 =
+Confused with the version numbers.  apparently 1.02 is greater than 1.1?
+
+= 1.1 =
+renamed all function names to be more consistent.
+use cookies before falling back to session.
+added back shortcode so users can go back to previous step.
 
 = 1.02 =
 updated version numbers.
