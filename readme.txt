@@ -2,8 +2,8 @@
 Contributors: webheadllc
 Tags: contact form 7, multistep form, form, multiple pages, store form
 Requires at least: 3.4.1
-Tested up to: 3.6
-Stable tag: 1.3.2
+Tested up to: 3.6.1
+Stable tag: 1.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,9 @@ I have used countless free plugins and have saved countless hours.  I could not 
 
 
 == Changelog ==
+
+= 1.3.3 =
+Fixed back button functionality.
 
 = 1.3.2 =
 Some people are having trouble with cookies.  added 'cf7msm_force_session' filter to force to use session.

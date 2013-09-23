@@ -5,9 +5,9 @@ jQuery(document).ready(function($) {
 		if (step_field.length > 0) {
 			var cf7_form = $(step_field[0].form);
 			$.each(cf7msm_posted_data, function(key, val){
-				if (key == 'cf7msm_prev_url') {
-					cf7_form.find('.wpcf7-back').click(function(e){
-						window.location.href = val;
+				if (key == 'cf7msm_prev_urls') {
+					cf7_form.find('.wpcf7-back').click(function(e) {
+						window.location.href = val[step_field.val()];
 						e.preventDefault();
 					});
 				}

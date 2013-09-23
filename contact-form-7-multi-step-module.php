@@ -67,7 +67,7 @@ function cf7msm_scripts() {
 
     //this makes the script useful even when cookies aren't used.    
     $cf7msm_posted_data = cf7msm_get('cf7msm_posted_data');
-    $cf7msm_posted_data['cf7msm_prev_url'] = cf7msm_get('cf7msm_prev_url');
+    $cf7msm_posted_data['cf7msm_prev_urls'] = cf7msm_get('cf7msm_prev_urls');
     wp_localize_script( 'cf7msm', 'cf7msm_posted_data', $cf7msm_posted_data);
 }
 add_action('wp_enqueue_scripts', 'cf7msm_scripts');
@@ -132,7 +132,7 @@ function cf7msm_step_2($cf7) {
     	$step = cf7msm_get('step');
         if ( !isset($matches[1]) 
         	|| ($matches[1] != 1 && empty($step) )
-        	|| ($matches[1] != 1 && ((int) $step) + 1 != $matches[1]) ) {
+        	|| ($matches[1] != 1 && ((int) $step) + 1 < $matches[1]) ) {
             $cf7->form = apply_filters('wh_hide_cf7_step_message', "Please fill out the form on the previous page");
         }
         if (count($matches) == 3 && $matches[1] != $matches[2]) {
@@ -148,11 +148,30 @@ add_action('wpcf7_contact_form', 'cf7msm_step_2');
  */
 function cf7msm_store_data_steps(&$cf7) {
     if (isset($cf7->posted_data['step'])) {
-    	cf7msm_set('cf7msm_prev_url', cf7msm_current_url());
         if (preg_match('/(\d+)-(\d+)/', $cf7->posted_data['step'], $matches)) {
             $curr_step = $matches[1];
             $last_step = $matches[2];
         }
+
+        //for back button
+        $prev_urls = cf7msm_get('cf7msm_prev_urls');
+        if ( empty($prev_urls) ) {
+            $prev_urls = array();
+        }
+        //example: 
+        // on step 1,
+        //    prev url {"2-3":"page-2"} will be set.
+        //    back button is pressed, key "1-3" is looked up and returns undefined
+        // on step 2,
+        //    prev url {"3-3":"page-2"} will be set.
+        //    back button is pressed, key "2-3" is looked up and returns "page-1"
+        // on step 3,
+        //    prev url {"4-3":"page-3"} will be set. - not used
+        //    back button is pressed, key "3-3" is looked up and returns "page-2"
+        // step 
+        $prev_urls[ ($curr_step+1) . '-' . $last_step] = cf7msm_current_url();
+        cf7msm_set('cf7msm_prev_urls', $prev_urls);
+
 		$prev_data = cf7msm_get('cf7msm_posted_data', '' );
 		if (!is_array($prev_data)) {
 			$prev_data = array();
