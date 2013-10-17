@@ -5,7 +5,7 @@ Plugin URI: http://www.mymonkeydo.com/contact-form-7-multi-step-module/
 Description: Enables the Contact Form 7 plugin to create multi-page, multi-step forms.
 Author: Webhead LLC.
 Author URI: http://webheadcoder.com 
-Version: 1.3.3
+Version: 1.3.4
 */
 /*  Copyright 2012 Webhead LLC (email: info at webheadcoder.com)
 
@@ -25,12 +25,22 @@ Version: 1.3.3
 */
 
 
-if (!in_array('contact-form-7-modules/hidden.php', get_option( 'active_plugins', array() ))) {
-	require_once(plugin_dir_path(__FILE__) . 'module-hidden.php');
+/**
+ * Load modules after plugins loaded to check for hidden module.
+ */
+function cf7msm_load_modules() {
+    if (!in_array('contact-form-7-modules/hidden.php', get_option( 'active_plugins', array() ))) {
+        //hack to let contact-form-7-modules be activated.
+        //next time require it to be activated instead of copying it in!
+        if (!is_admin() ||  !isset($_GET['action']) || $_GET['action'] != 'activate' ) {
+            require_once(plugin_dir_path(__FILE__) . 'module-hidden.php');   
+        }
+    }
+    require_once(plugin_dir_path(__FILE__) . 'module-session.php');
+    require_once(plugin_dir_path(__FILE__) . 'module-back.php');
 }
-require_once(plugin_dir_path(__FILE__) . 'module-session.php');
-require_once(plugin_dir_path(__FILE__) . 'module-back.php');
-    
+add_action('plugins_loaded', 'cf7msm_load_modules', 2);
+
 /**
  * init_sessions()
  *

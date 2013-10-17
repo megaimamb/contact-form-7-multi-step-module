@@ -3,7 +3,7 @@ Contributors: webheadllc
 Tags: contact form 7, multistep form, form, multiple pages, store form
 Requires at least: 3.4.1
 Tested up to: 3.6.1
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,6 +48,9 @@ I have used countless free plugins and have saved countless hours.  I could not 
 
 
 == Changelog ==
+
+= 1.3.4 =
+Fix:  Better detection of contact-form-7-modules plugin so no conflicts arise if both are activated.
 
 = 1.3.3 =
 Fixed back button functionality.
